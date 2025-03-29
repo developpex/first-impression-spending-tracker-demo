@@ -1,5 +1,7 @@
 import datetime
 import decimal
+import traceback
+import csv
 
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
@@ -7,7 +9,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 # import the models from the database
 from .models import Transaction
-import csv
 
 # Create your views here.
 def index(request):
@@ -36,9 +37,7 @@ def upload_csv(request):
             Transaction.objects.bulk_create(transactions)
             return JsonResponse({'message': 'CSV file uploaded successfully'})
         except Exception as e:
-            # This will print the error to the console and log it if logging is configured
             print("Error in upload_csv:", e)
-            import traceback
             traceback.print_exc()
             return JsonResponse({'error': str(e)}, status=500)
 
@@ -60,10 +59,10 @@ def get_monthly_spending(request):
     # Convert QuerySet to a list of dictionaries
     data = [
         {
-            "date": transaction.date.strftime("%Y-%m-%d"),  # Format date
+            "date": transaction.date.strftime("%Y-%m-%d"),
             "category": transaction.category,
             "description": transaction.description,
-            "amount": float(transaction.amount)  # Convert Decimal to float
+            "amount": float(transaction.amount)
         }
         for transaction in monthly_spending
     ]
