@@ -53,10 +53,7 @@ def delete_all_transactions(request):
     return JsonResponse({"error": "Invalid request method"}, status=400)
 
 def get_monthly_spending(request):
-    # Query all transactions
     monthly_spending = Transaction.objects.all()
-
-    # Convert QuerySet to a list of dictionaries
     data = [
         {
             "date": transaction.date.strftime("%Y-%m-%d"),
