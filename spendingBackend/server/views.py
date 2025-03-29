@@ -14,26 +14,33 @@ def index(request):
     return render(request, 'index.html')
 
 # functions that handle the api logic
-@csrf_exempt #Cross-Site Request Forgery
+@csrf_exempt
 def upload_csv(request):
     if request.method == 'POST' and request.FILES.get('csv_file'):
-        csv_file = request.FILES['csv_file']
-        decoded_file = csv_file.read().decode('utf-8').splitlines()
-        reader = csv.DictReader(decoded_file)
+        try:
+            csv_file = request.FILES['csv_file']
+            decoded_file = csv_file.read().decode('utf-8').splitlines()
+            reader = csv.DictReader(decoded_file)
 
-        transactions = []
-        for row in reader:
-            transactions.append(
-                Transaction(
-                    amount=decimal.Decimal(row['amount']),
-                    date=datetime.datetime.strptime(row['date'], "%Y-%m-%d").date(),
-                    description=row['description'],
-                    category=row['category']
+            transactions = []
+            for row in reader:
+                transactions.append(
+                    Transaction(
+                        amount=decimal.Decimal(row['amount']),
+                        date=datetime.datetime.strptime(row['date'], "%Y-%m-%d").date(),
+                        description=row['description'],
+                        category=row['category']
+                    )
                 )
-            )
 
-        Transaction.objects.bulk_create(transactions)  # Bulk insert for efficiency
-        return JsonResponse({'message': 'CSV file uploaded successfully'})
+            Transaction.objects.bulk_create(transactions)
+            return JsonResponse({'message': 'CSV file uploaded successfully'})
+        except Exception as e:
+            # This will print the error to the console and log it if logging is configured
+            print("Error in upload_csv:", e)
+            import traceback
+            traceback.print_exc()
+            return JsonResponse({'error': str(e)}, status=500)
 
     return HttpResponse(status=400)
 

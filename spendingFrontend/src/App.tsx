@@ -45,49 +45,59 @@ function App() {
     }
   };
 
-  const handleUpload = async (event: React.FormEvent) => {
-    event.preventDefault();
-    if (!file) return;
-
-    setUploading(true);
-    const formData = new FormData();
-    formData.append('csv_file', file);
-
-    try {
-      const response = await fetch(`${serverUrl}/upload_csv/`, {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error('Upload failed');
+    const handleUpload = async (event: React.FormEvent) => {
+      event.preventDefault();
+      if (!file) {
+        console.warn("No file selected for upload.");
+        return;
       }
 
-      fetchMonthlySpending();
-      setFile(null);
-    } catch (error) {
-      console.error('Error uploading file:', error);
-    } finally {
-      setUploading(false);
-    }
-  };
+      setUploading(true);
+      const formData = new FormData();
+      formData.append("csv_file", file);
 
-  const handleDeleteAll = async () => {
-    try {
-      const response = await fetch(`${serverUrl}/delete_all_transactions/`, {
-        method: 'DELETE',
-      });
+      try {
+        const response = await fetch(`${serverUrl}/upload_csv/`, {
+          method: "POST",
+          body: formData,
+        });
 
-      if (!response.ok) {
-        throw new Error('Delete failed');
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Upload failed. Status: ${response.status}, Response: ${errorText}`);
+        }
+
+        fetchMonthlySpending();
+
+        setFile(null);
+      } catch (error) {
+        console.error("Error uploading file:", error);
+      } finally {
+        setUploading(false);
+        console.info("Upload process finished.");
       }
+    };
 
-      fetchMonthlySpending();
-      setShowDeleteConfirm(false);
+
+    const handleDeleteAll = async () => {
+    try {
+        fetch(`${serverUrl}/delete_all_transactions/`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Delete failed');
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            return fetchMonthlySpending();
+        })
+        .then(() => setShowDeleteConfirm(false))
+        .catch(error => console.error('Error deleting data:', error));
     } catch (error) {
-      console.error('Error deleting data:', error);
+        console.error('Error deleting data:', error);
     }
-  };
+    };
 
   const fetchMonthlySpending = async () => {
     try {
