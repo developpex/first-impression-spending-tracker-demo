@@ -1,4 +1,4 @@
-# Eerste Indruk - Django / Python - Demo
+# First-Impression - Django / Python - Demo
 
 ## Inleiding
 Voor deze vacature werd gevraagd om een stuk code mee te sturen ter demonstratie van mijn vaardigheden. Hoewel ik nog geen ervaring had met Django, heb ik al veel gewerkt met API's en backend-ontwikkeling. Daarom heb ik de tijd genomen om Django te leren en een kleine demo-applicatie te ontwikkelen.
