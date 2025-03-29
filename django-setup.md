@@ -130,7 +130,7 @@ npm run build
 
 ### Update `index.html` with Asset Paths
 Edit the `index.html` file in my templates folder to reference the static assets:
-```powershell
+```html
     {% load static %}
     <script type="module" crossorigin src="{% static 'assets/<index-#####.js>' %}"></script>
     <link rel="stylesheet" crossorigin href="{% static 'assets/<index-#####.css>' %}">
@@ -223,11 +223,10 @@ Set the following options in my OpenLiteSpeed App Server configuration:
 
 - **Location:** `/usr/local/lsws/<Host>/html/<Backend>/`
 - **Startup File:** `<Backend>/wsgi.py`
-- **Environment:**  
-  `PYTHONPATH=/usr/local/lsws/<host>/html/lib/python3.12:/usr/local/lsws/<host>/html/<backend>`
+- **Environment:** `PYTHONPATH=/usr/local/lsws/<host>/html/lib/python3.12:/usr/local/lsws/<host>/html/<backend>`
 - **LS_PYTHONBIN:** `/usr/local/lsws/<host>/html/bin/python`
 
-After entering these values, click **save**.
+Then click **save**.
 
 #### Edit Static File Settings
 
@@ -244,11 +243,8 @@ Then click **save**.
 
 For the default listener, use the following configuration:
 
-- **Location:** `/usr/local/lsws/<Host>/html/<Backend>/`
-- **Startup File:** `<Backend>/wsgi.py`
-- **Environment:**  
-  `PYTHONPATH=/usr/local/lsws/<host>/html/lib/python3.12:/usr/local/lsws/<host>/html/<backend>`
-- **LS_PYTHONBIN:** `/usr/local/lsws/<host>/html/bin/python`
+- **Virtual Host:** `<host>`
+- **Domain:** `<domain>`
 
 Then click **save**.
 
