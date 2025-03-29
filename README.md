@@ -15,5 +15,5 @@ In mijn Git-repository heb ik een voorbeeldbestand `(*spending.csv*)` toegevoegd
 
 ---
 
-Met deze demo wil ik laten zien hoe snel ik nieuwe technologieën kan oppakken en toepassen in een werkende applicatie. Ik kijk ernaar uit om deze verder toe te lichten.
+Met deze demo wil ik laten zien hoe ik nieuwe technologieën oppak en toepas in een werkende applicatie. Ik kijk ernaar uit om deze verder toe te lichten.
 
