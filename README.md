@@ -9,11 +9,14 @@ Voor deze demo heb ik een eenvoudige uitgaven-tracker ontwikkeld om het CRUD-pro
 De applicatie maakt gebruik van een SQLite-database waarin gegevens worden gelezen en geschreven via Django models. Gebruikers kunnen een CSV-bestand uploaden, waarna de gegevens automatisch in de database worden opgeslagen. Vervolgens kunnen deze gegevens via de frontend worden opgevraagd en indien nodig verwijderd.
 
 ## Hosting
-De applicatie is gehost op een VPS-server van Hostinger en is bereikbaar op het volgende IP-adres: **69.62.113.18**.
+De applicatie is gehost op een VPS-server van Hostinger en is bereikbaar op het volgende IP-adres: **69.62.113.18** of via **http://www.srv772929.hstgr.cloud/**.
 
 In mijn Git-repository heb ik een voorbeeldbestand `(*spending.csv*)` toegevoegd dat kan worden geüpload, evenals een document `(*django-setup.md*)` waarin ik mijn werkwijze en opzet beschrijf. Dit dient als referentie voor toekomstige projecten of verdere ontwikkeling.
 
 ---
 
 Met deze demo wil ik laten zien hoe ik nieuwe technologieën oppak en toepas in een werkende applicatie. Ik kijk ernaar uit om deze verder toe te lichten.
+
+## Frontend
+![image](https://github.com/user-attachments/assets/7c4a77fd-74b4-46a1-b294-c3c512c801e3)
 
